@@ -28,7 +28,7 @@ def dashboard():
     username = request.form.get("username")
     password = request.form.get("password")
     title = "Dashboard Home"
-    if not username or not password or (username != "guest" and password != "password"):
+    if not username or not password or (username != "guest" or password != "password"):
         error_st_login_credentials = "Incorrect Login Credentials"
         sec_log.write('Invalid Login Attempt at: ' + str(datetime.now()))
         return render_template('login.html', title=title, error_st_login_credentials=error_st_login_credentials)
