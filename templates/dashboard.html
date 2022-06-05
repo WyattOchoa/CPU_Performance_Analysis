@@ -41,6 +41,15 @@
                         <div class="card-body">
                             Current accuracy of the prediction model: {{ avg }}
                         </div>
+                        <div class="card-body">
+                            Model r-squared: {{ model_r_squared }}
+                        </div>
+                        <div class="card-body">
+                            Model intercept (b0): {{ intercept }}
+                        </div>
+                        <div class="card-body">
+                            Model coefficient (b1): {{ coefficient }}
+                        </div>
                     </div>
                     <div class="card-body">
                         ***Requested performance prediction has been plotted on Figure 2A.***
