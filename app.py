@@ -64,11 +64,23 @@ def query():
     user_prediction = int(user_prediction.item())
     user_query_graphing(user_date_format_query, user_prediction)
 
-    # avg variable = coefficient of determination (different in prediction vs actual)
-    avg = model.score(x, y)
-    # Rounded to and converted to a percentage for ease of viewing
-    avg = str(round((avg * 100), 2)) + '%'
-    return render_template('dashboard.html', user_prediction=user_prediction, avg=avg)
+    # Model Coefficient
+    coefficient = model.coef_
+    coefficient = np.array(coefficient, dtype='<M8[ns]')
+    coefficient = coefficient.flatten()
+
+    # Model Intercept
+    intercept = model.intercept_
+    intercept = np.array(intercept, dtype='<M8[ns]')
+
+    # coefficient of determination (different in prediction vs actual)
+    model_r_squared = model.score(x, y)
+
+    # Rounded r-squared and converted to a percentage for ease of viewing
+    avg = str(round((model_r_squared * 100), 2)) + '%'
+
+    return render_template('dashboard.html', user_prediction=user_prediction, avg=avg, coefficient=coefficient,
+                           intercept=intercept, model_r_squared=model_r_squared)
 
 
 # Creates a df (data frame) object from the read in CSV
